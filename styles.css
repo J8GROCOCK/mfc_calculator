@@ -1,0 +1,93 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: url(lecture_hall.jpg);
+    background-size:cover;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#calculator {
+    height: 700px;
+    width: 600px;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    padding-right: 10px;
+    padding-left: 8px;
+    border: 4px solid black;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 20px rgb(111, 79, 255); 
+    -moz-box-shadow: 0 0 20px rgb(111, 79, 255); 
+    box-shadow: 0 0 20px rgb(111, 79, 255);
+}
+
+#screen {
+    height: 100px;
+    width: 550px;
+    padding-top: 25px;
+    background-color: rgb(196, 196, 24);
+    border: 2px solid black;
+    margin: 25px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-family: 'VT323', monospace;
+    font-size: 110px;
+    text-align: right;
+    vertical-align: bottom;
+}
+
+#screen:focus {
+    outline: none;
+}
+
+#buttons {
+    width: 550px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 0;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 23px; 
+    padding: 0 20px;
+    margin-top: 0;
+}
+
+
+.button, .button-spacer {
+    height: 90px;
+    width: 124px;
+    border-radius: 8px;
+    font-size: 60px;
+    font-weight: 100;
+    box-shadow: -4px -4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    font-family: inherit;
+}
+
+.button-spacer {
+    background-color: gray;
+    box-shadow: 0px -0px gray;
+}
+
+.button:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.button:active {
+    height: 86px;
+    width: 120px;
+    box-shadow: -1px -1px rgba(0, 0, 0, 0.1);
+    background-color: rgb(205, 205, 205);
+}

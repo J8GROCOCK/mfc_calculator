@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script defer src="/scripts.js"></script>
+</head>
+<body>
+    <main id="calculator">
+        <section id="display">
+            <label for="screen" class="visually-hidden">J8Grcck</label>
+            <input type="text" id="screen" name="screen" placeholder="Hello" readonly>
+        </section>
+
+        <section id="buttons" aria-label="Calculator buttons">
+            <div class="row">
+                <button class="button" data-action="all-clear" aria-label="All-Clear">AC</button>
+                <button class="button" data-action="clear" aria-label="Clear">C</button>
+                <button class="button" data-value="decimal" aria-label="Decimal">.</button>
+                <button class="button" data-value="+" aria-label="Add">+</button>            
+            </div>
+            <div class="row">
+                <button class="button" data-value="7">7</button>
+                <button class="button" data-value="8">8</button>
+                <button class="button" data-value="9">9</button>
+                <button class="button" data-value="-" aria-label="Subtract">-</button>
+            </div>
+            <div class="row">
+                <button class="button" data-value="4">4</button>
+                <button class="button" data-value="5">5</button>
+                <button class="button" data-value="6">6</button>
+                <button class="button" data-value="*" aria-label="Multiply">x</button>
+            </div>
+            <div class="row">
+                <button class="button" data-value="1">1</button>
+                <button class="button" data-value="2">2</button>
+                <button class="button" data-value="3">3</button>
+                <button class="button" data-value="/" aria-label="Divide">/</button> 
+            </div>
+            <div class="row">
+                <button class="button-spacer" aria-label="Space"></button>
+                <button class="button" data-value="0">0</button>
+                <button class="button-spacer" aria-label="Space"></button>
+                <button class="button" data-action="equals" aria-label="Equals">=</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
