@@ -35,8 +35,11 @@ function calculate() {
     const num2 = parseFloat(operand2);
 
     if (operator === '/' && num2 === 0) {
-        updateScreen("Nice try 🙄");
-        clearAll();
+        updateScreen("No Zero Div!");
+        operand1 = '';
+        operand2 = '';
+        operator = '';
+        result = null;
         return;
     }
 
@@ -73,6 +76,7 @@ function clearLast() {
     }
 }
 
+// Click Logic for Gui Buttons
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         const value = button.dataset.value;
@@ -100,6 +104,7 @@ buttons.forEach(button => {
     });
 });
 
+// Keyboard Logic 
 document.addEventListener('keydown', (event) => {
     const key = event.key;
 
