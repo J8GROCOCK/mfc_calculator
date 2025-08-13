@@ -7,14 +7,45 @@ function updateScreen() {
     screen.value = currentInput.join('');
 }
 
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+
+    if (!isNaN(key) || key === '.') {
+        currentInput.push(key);
+        updateScreen();
+    }
+
+    if (['+', '-', '*', '/'].includes(key)) {
+        currentInput.push(key);
+        updateScreen();
+    }
+
+    if (key === 'Enter' || key === '=') {
+        calculation();
+    }
+
+    if (key === 'Backspace') {
+        currentInput.pop();
+        updateScreen();
+    }
+
+    if (key === 'Escape') {
+        currentInput = [];
+        updateScreen();
+    }
+});
+
+
 function calculation() {
     const expression = currentInput.join('');
     try {
         const result = eval(expression);
-        currentInput = [result.toString()];
+        const formattedResult = parseFloat(result.toFixed(4));
+        currentInput = [formattedResult.toString()];
     } catch (e) {
-        alert('Invalid expression! No unary operations or division by 0!');
+        screen.value = "Invalid!";
         currentInput = [];
+        return;
     }
     updateScreen();
 }
