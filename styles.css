@@ -86,8 +86,7 @@ body {
 }
 
 .button:active {
-    height: 86px;
-    width: 120px;
+    transform: scale(0.96);
     box-shadow: -1px -1px rgba(0, 0, 0, 0.1);
     background-color: rgb(205, 205, 205);
 }
