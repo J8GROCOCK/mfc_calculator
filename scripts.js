@@ -1,53 +1,76 @@
 const screen = document.getElementById('screen');
-let currentInput = [];
-
 const buttons = document.querySelectorAll('#buttons .button');
 
-function updateScreen() {
-    screen.value = currentInput.join('');
+let operand1 = '';
+let operand2 = '';
+let operator = '';
+let result = null;
+
+function updateScreen(value) {
+    screen.value = value;
 }
 
-document.addEventListener('keydown', (event) => {
-    const key = event.key;
-
-    if (!isNaN(key) || key === '.') {
-        currentInput.push(key);
-        updateScreen();
+function appendNumber(num) {
+    if (operator === '') {
+        operand1 += num;
+        updateScreen(operand1);
+    } else {
+        operand2 += num;
+        updateScreen(operand2);
     }
+}
 
-    if (['+', '-', '*', '/'].includes(key)) {
-        currentInput.push(key);
-        updateScreen();
+function setOperator(op) {
+    if (operand1 === '') return;
+    if (operand2 !== '') {
+        calculate();
     }
+    operator = op;
+}
 
-    if (key === 'Enter' || key === '=') {
-        calculation();
-    }
+function calculate() {
+    if (operand1 === '' || operand2 === '' || operator === '') return;
 
-    if (key === 'Backspace') {
-        currentInput.pop();
-        updateScreen();
-    }
+    const num1 = parseFloat(operand1);
+    const num2 = parseFloat(operand2);
 
-    if (key === 'Escape') {
-        currentInput = [];
-        updateScreen();
-    }
-});
-
-
-function calculation() {
-    const expression = currentInput.join('');
-    try {
-        const result = eval(expression);
-        const formattedResult = parseFloat(result.toFixed(4));
-        currentInput = [formattedResult.toString()];
-    } catch (e) {
-        screen.value = "Invalid!";
-        currentInput = [];
+    if (operator === '/' && num2 === 0) {
+        updateScreen("Nice try 🙄");
+        clearAll();
         return;
     }
-    updateScreen();
+
+    switch (operator) {
+        case '+': result = num1 + num2; break;
+        case '-': result = num1 - num2; break;
+        case '*': result = num1 * num2; break;
+        case '/': result = num1 / num2; break;
+    }
+
+    result = parseFloat(result.toFixed(4));
+    updateScreen(result);
+
+    operand1 = result.toString();
+    operand2 = '';
+    operator = '';
+}
+
+function clearAll() {
+    operand1 = '';
+    operand2 = '';
+    operator = '';
+    result = null;
+    updateScreen('');
+}
+
+function clearLast() {
+    if (operator === '') {
+        operand1 = operand1.slice(0, -1);
+        updateScreen(operand1);
+    } else {
+        operand2 = operand2.slice(0, -1);
+        updateScreen(operand2);
+    }
 }
 
 buttons.forEach(button => {
@@ -56,22 +79,48 @@ buttons.forEach(button => {
         const action = button.dataset.action;
 
         if (value) {
-            currentInput.push(value);
-            updateScreen();
+            if (!isNaN(value) || value === '.') {
+                appendNumber(value);
+            } else {
+                setOperator(value);
+            }
         } else if (action) {
-            switch(action) {
+            switch (action) {
                 case 'all-clear':
-                    currentInput = [];
-                    updateScreen();
+                    clearAll();
                     break;
                 case 'clear':
-                    currentInput.pop();
-                    updateScreen();
+                    clearLast();
                     break;
                 case 'equals':
-                    calculation();
+                    calculate();
                     break;
             }
         }
     });
+});
+
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+
+    if (!isNaN(key) || key === '.') {
+        appendNumber(key);
+    }
+
+    if (['+', '-', '*', '/'].includes(key)) {
+        setOperator(key);
+    }
+
+    if (key === 'Enter' || key === '=') {
+        event.preventDefault(); // stop form submission
+        calculate();
+    }
+
+    if (key === 'Backspace') {
+        clearLast();
+    }
+
+    if (key === 'Escape') {
+        clearAll();
+    }
 });
