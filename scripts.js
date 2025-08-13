@@ -112,7 +112,7 @@ document.addEventListener('keydown', (event) => {
     }
 
     if (key === 'Enter' || key === '=') {
-        event.preventDefault(); // stop form submission
+        event.preventDefault();
         calculate();
     }
 
